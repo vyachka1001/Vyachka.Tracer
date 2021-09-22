@@ -4,6 +4,11 @@
     {
         private readonly TraceResult _traceResult;
         
+        public Tracer()
+        {
+            _traceResult = new TraceResult();
+        }
+
         public void StartTrace()
         {
 
@@ -16,7 +21,7 @@
 
         public TraceResult GetTraceResult()
         {
-            return _traceResult
+            return _traceResult;
         }
     }
 }
