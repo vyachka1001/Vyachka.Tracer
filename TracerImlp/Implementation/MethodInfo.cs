@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tracer.Library.Implementation
 {
@@ -14,14 +10,16 @@ namespace Tracer.Library.Implementation
         public string ClassName { get; set; }
 
         private readonly Stopwatch _stopWatch = new();
-        private List<MethodInfo> InnerMethods { get; set; }
+        public List<MethodInfo> InnerMethods { get; set; }
+        private readonly string _methodPath;
 
         public MethodInfo() { }
 
-        public MethodInfo(string methodName, string className)
+        public MethodInfo(string methodName, string className, string methodPath)
         {
             ClassName = className;
             MethodName = methodName;
+            _methodPath = methodPath;
             _stopWatch.Start();
         }
 
@@ -39,6 +37,11 @@ namespace Tracer.Library.Implementation
         public long GetElapsedTime()
         {
             return _stopWatch.ElapsedMilliseconds;
+        }
+
+        public string GetMethodPath()
+        {
+            return _methodPath;
         }
     }
 }
