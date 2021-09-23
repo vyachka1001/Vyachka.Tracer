@@ -18,10 +18,10 @@ namespace Tracer.ConsoleApp
             thread.Join();
 
             var result = tracer.GetTraceResult();
-            foreach(var threadTrace in result.GetThreadTraces().Values)
+            foreach (var threadTrace in result.GetThreadTraces().Values)
             {
                 Console.WriteLine($"ThreadId = {threadTrace.ThreadId}; ThreadTime = {threadTrace.ThreadTime}");
-                foreach(var info in threadTrace.MethodsInfo)
+                foreach (var info in threadTrace.MethodsInfo)
                 {
                     Console.WriteLine($"Class: {info.ClassName}, Method: {info.MethodName}, Time: {info.Time}");
                 }
@@ -32,7 +32,7 @@ namespace Tracer.ConsoleApp
 
         public void Method(object obj)
         {
-            var tracer = (Library.Implementation.Tracer) obj;
+            var tracer = (Library.Implementation.Tracer)obj;
             tracer.StartTrace();
             Thread.Sleep(100);
             tracer.StopTrace();
