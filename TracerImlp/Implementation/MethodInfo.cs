@@ -1,17 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Xml.Serialization;
 
 namespace Tracer.Library.Implementation
 {
     public class MethodInfo
     {
-        public double Time { get; set; }
-        public string MethodName { get; set; }
-        public string ClassName { get; set; }
+        [JsonProperty, XmlAttribute("time")] public double Time { get; set; }
+        [JsonProperty, XmlAttribute("name")] public string MethodName { get; set; }
+        [JsonProperty, XmlAttribute("class")] public string ClassName { get; set; }
 
-        private readonly Stopwatch _stopWatch = new();
-        public List<MethodInfo> InnerMethods { get; set; }
-        private readonly string _methodPath;
+        [JsonIgnore] private readonly Stopwatch _stopWatch = new();
+        [JsonProperty, XmlElement("methods")] public List<MethodInfo> InnerMethods { get; set; }
+        [JsonIgnore] private readonly string _methodPath;
 
         public MethodInfo() { }
 
